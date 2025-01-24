@@ -10,7 +10,10 @@
  * 
  */
 UCLASS()
-class DYNAMICWINDOWS_API UDynamicWindowsPanelSlot : public UCanvasPanelSlot
+class DYNAMICWINDOWS_API UDynamicWindowsPanelSlot : public UPanelSlot
 {
 	GENERATED_BODY()
+
+public:
+	void BuildDynamicWindowSlot(TSharedRef<SConstraintCanvas> Canvas);
 };

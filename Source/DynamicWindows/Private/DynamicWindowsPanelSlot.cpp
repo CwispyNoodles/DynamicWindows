@@ -2,3 +2,12 @@
 
 
 #include "DynamicWindowsPanelSlot.h"
+
+void UDynamicWindowsPanelSlot::BuildDynamicWindowSlot(TSharedRef<SConstraintCanvas> Canvas)
+{
+	// Canvas->AddSlot()
+	// .Expose(Slot)
+	// [
+	// 	
+	// ];
+}

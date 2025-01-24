@@ -17,7 +17,11 @@ UClass* UDynamicWindowsPanel::GetSlotClass() const
 
 void UDynamicWindowsPanel::OnSlotAdded(UPanelSlot* InSlot)
 {
-	Super::OnSlotAdded(InSlot);
+	// Add the child to the live canvas if it already exists
+	// if ( MyCanvas.IsValid() )
+	// {
+	// 	CastChecked<UDynamicWindowsPanelSlot>(InSlot)->BuildDynamicWindowSlot(MyCanvas.ToSharedRef());
+	// }
 }
 
 void UDynamicWindowsPanel::OnSlotRemoved(UPanelSlot* InSlot)

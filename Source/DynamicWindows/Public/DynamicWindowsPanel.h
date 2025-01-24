@@ -12,7 +12,7 @@ class UDynamicWindowWidget;
  * 
  */
 UCLASS()
-class DYNAMICWINDOWS_API UDynamicWindowsPanel : public UCanvasPanel
+class DYNAMICWINDOWS_API UDynamicWindowsPanel : public UPanelWidget
 {
 	GENERATED_BODY()
 
