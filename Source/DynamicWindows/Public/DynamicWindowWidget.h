@@ -17,7 +17,7 @@ class DYNAMICWINDOWS_API UDynamicWindowWidget : public UUserWidget
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta=(BindWidget))
-	TObjectPtr<UButton> TaskBar;
+	TObjectPtr<UButton> Taskbar;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta=(BindWidget))
 	TObjectPtr<UButton> CloseButton;
