@@ -5,6 +5,11 @@
 
 #include "DynamicWindowsPanelSlot.h"
 
+UDynamicWindowsPanelSlot* UDynamicWindowsPanel::AddChildToDynamicWindows(UWidget* Content)
+{
+	return Cast<UDynamicWindowsPanelSlot>( Super::AddChild(Content) );
+}
+
 UClass* UDynamicWindowsPanel::GetSlotClass() const
 {
 	return UDynamicWindowsPanelSlot::StaticClass();

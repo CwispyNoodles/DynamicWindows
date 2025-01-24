@@ -6,6 +6,7 @@
 #include "Components/CanvasPanel.h"
 #include "DynamicWindowsPanel.generated.h"
 
+class UDynamicWindowsPanelSlot;
 class UDynamicWindowWidget;
 /**
  * 
@@ -16,6 +17,9 @@ class DYNAMICWINDOWS_API UDynamicWindowsPanel : public UCanvasPanel
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(BlueprintCallable, Category="Dynamic Windows Panel")
+	UDynamicWindowsPanelSlot* AddChildToDynamicWindows(UWidget* Content);
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UDynamicWindowWidget> DynamicWindowWidgetClass;
 
