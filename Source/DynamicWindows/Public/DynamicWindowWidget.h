@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Abstract)
 class DYNAMICWINDOWS_API UDynamicWindowWidget : public UUserWidget
 {
 	GENERATED_BODY()
