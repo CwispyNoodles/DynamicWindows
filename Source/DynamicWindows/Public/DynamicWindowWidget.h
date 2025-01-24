@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "DynamicWindowWidget.generated.h"
 
+class UButton;
 /**
  * 
  */
@@ -13,4 +14,8 @@ UCLASS(Abstract)
 class DYNAMICWINDOWS_API UDynamicWindowWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(BindWidget))
+	TObjectPtr<UButton> TaskBar;
 };
