@@ -32,8 +32,10 @@ void UDynamicWindowContainer::NativeConstruct()
 
 TSharedRef<SWidget> UDynamicWindowContainer::RebuildWidget()
 {
-	TSharedRef<SWidget> Widget = Super::RebuildWidget();
-	DynamicWindowPanel = WidgetTree->ConstructWidget<UCanvasPanel>(UCanvasPanel::StaticClass(), TEXT("DynamicWindowPanel"));
-	WidgetTree->RootWidget = DynamicWindowPanel;
-	return Widget;
+	if (WidgetTree)
+	{
+		DynamicWindowPanel = WidgetTree->ConstructWidget<UCanvasPanel>(UCanvasPanel::StaticClass(), TEXT("DynamicWindowPanel"));
+		WidgetTree->RootWidget = DynamicWindowPanel;
+	}
+	return Super::RebuildWidget();
 }
