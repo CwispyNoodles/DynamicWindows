@@ -6,11 +6,33 @@
 #include "Blueprint/UserWidget.h"
 #include "DynamicWindowContainer.generated.h"
 
+class UCanvasPanelSlot;
+class UCanvasPanel;
 /**
  * 
  */
-UCLASS()
+UCLASS(NotBlueprintable)
 class DYNAMICWINDOWS_API UDynamicWindowContainer : public UUserWidget
 {
 	GENERATED_BODY()
+
+public:
+	UFUNCTION(CallInEditor)
+	void AddDynamicWindowTest();
+	
+	UFUNCTION(BlueprintCallable)
+	UCanvasPanelSlot* AddDynamicWindow(UWidget* Content);
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UUserWidget> Widget;
+
+protected:
+	UPROPERTY()
+	TObjectPtr<UCanvasPanel> DynamicWindowPanel;
+
+public: // UUserWidget Interface
+	virtual void NativeConstruct() override;
+	virtual TSharedRef<SWidget> RebuildWidget() override;
+
+	
 };
