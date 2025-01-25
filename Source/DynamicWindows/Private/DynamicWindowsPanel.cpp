@@ -4,6 +4,8 @@
 #include "DynamicWindowsPanel.h"
 
 #include "DynamicWindowsPanelSlot.h"
+#include "DynamicWindowWidget.h"
+#include "Components/NamedSlot.h"
 
 UDynamicWindowsPanelSlot* UDynamicWindowsPanel::AddChildToDynamicWindows(UWidget* Content)
 {
@@ -17,11 +19,7 @@ UClass* UDynamicWindowsPanel::GetSlotClass() const
 
 void UDynamicWindowsPanel::OnSlotAdded(UPanelSlot* InSlot)
 {
-	// Add the child to the live canvas if it already exists
-	// if ( MyCanvas.IsValid() )
-	// {
-	// 	CastChecked<UDynamicWindowsPanelSlot>(InSlot)->BuildDynamicWindowSlot(MyCanvas.ToSharedRef());
-	// }
+	Super::OnSlotAdded(InSlot);
 }
 
 void UDynamicWindowsPanel::OnSlotRemoved(UPanelSlot* InSlot)

@@ -6,14 +6,15 @@
 #include "Components/CanvasPanelSlot.h"
 #include "DynamicWindowsPanelSlot.generated.h"
 
+class UDynamicWindowWidget;
 /**
  * 
  */
 UCLASS()
-class DYNAMICWINDOWS_API UDynamicWindowsPanelSlot : public UPanelSlot
+class DYNAMICWINDOWS_API UDynamicWindowsPanelSlot : public UCanvasPanelSlot
 {
 	GENERATED_BODY()
 
 public:
-	void BuildDynamicWindowSlot(TSharedRef<SConstraintCanvas> Canvas);
+	TObjectPtr<UDynamicWindowWidget> DynamicWindowWidget;
 };
