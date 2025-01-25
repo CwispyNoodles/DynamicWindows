@@ -7,6 +7,7 @@
 #include "Blueprint/WidgetTree.h"
 #include "Components/CanvasPanel.h"
 #include "Components/CanvasPanelSlot.h"
+#include "Components/NamedSlot.h"
 
 UDynamicWindowContainer::UDynamicWindowContainer(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -16,18 +17,20 @@ UDynamicWindowContainer::UDynamicWindowContainer(const FObjectInitializer& Objec
 	
 }
 
-UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(UWidget* Content)
+UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(bool& bSuccess, UWidget* Content)
 {
-	UCanvasPanelSlot* CanvasPanelSlot = DynamicWindowPanel->AddChildToCanvas(Content);
+	if (!DynamicWindowWidgetClass)
+	{
+		bSuccess = false;
+		return nullptr;
+	}
+
+	UDynamicWindowWidget* NewDynamicWindow = CreateWidget<UDynamicWindowWidget>(this, DynamicWindowWidgetClass);
+	NewDynamicWindow->Content->SetContent(Content);
+	UCanvasPanelSlot* CanvasPanelSlot = DynamicWindowPanel->AddChildToCanvas(NewDynamicWindow);
 	CanvasPanelSlot->SetAutoSize(true);
+	bSuccess = true;
 	return CanvasPanelSlot;
-}
-
-void UDynamicWindowContainer::NativeConstruct()
-{
-	Super::NativeConstruct();
-
-	
 }
 
 TSharedRef<SWidget> UDynamicWindowContainer::RebuildWidget()
