@@ -19,18 +19,29 @@ UDynamicWindowContainer::UDynamicWindowContainer(const FObjectInitializer& Objec
 
 UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(bool& bSuccess, UWidget* Content)
 {
-	if (!DynamicWindowWidgetClass)
-	{
-		bSuccess = false;
+	UDynamicWindowWidget* NewDynamicWindow = InitializeNewDynamicWindow(bSuccess);
+	if (!bSuccess)
 		return nullptr;
-	}
-
-	UDynamicWindowWidget* NewDynamicWindow = CreateWidget<UDynamicWindowWidget>(this, DynamicWindowWidgetClass);
+	
 	NewDynamicWindow->Content->SetContent(Content);
 	UCanvasPanelSlot* CanvasPanelSlot = DynamicWindowPanel->AddChildToCanvas(NewDynamicWindow);
 	CanvasPanelSlot->SetAutoSize(true);
 	bSuccess = true;
 	return CanvasPanelSlot;
+}
+
+UDynamicWindowWidget* UDynamicWindowContainer::InitializeNewDynamicWindow(bool& bSuccess)
+{
+	if (!DynamicWindowWidgetClass)
+	{
+		bSuccess = false;
+		return nullptr;
+	}
+	
+	UDynamicWindowWidget* NewDynamicWindow = CreateWidget<UDynamicWindowWidget>(this, DynamicWindowWidgetClass);
+	
+	bSuccess = true;
+	return NewDynamicWindow;
 }
 
 TSharedRef<SWidget> UDynamicWindowContainer::RebuildWidget()
@@ -41,4 +52,11 @@ TSharedRef<SWidget> UDynamicWindowContainer::RebuildWidget()
 		WidgetTree->RootWidget = DynamicWindowPanel;
 	}
 	return Super::RebuildWidget();
+}
+
+void UDynamicWindowContainer::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+	Super::NativeTick(MyGeometry, InDeltaTime);
+
+	
 }

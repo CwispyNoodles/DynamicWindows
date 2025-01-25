@@ -26,12 +26,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UDynamicWindowWidget> DynamicWindowWidgetClass;
 
+private:
+	UDynamicWindowWidget* InitializeNewDynamicWindow(bool& bSuccess);
+	
 protected:
 	UPROPERTY()
 	TObjectPtr<UCanvasPanel> DynamicWindowPanel;
 
 public: // UUserWidget Interface
 	virtual TSharedRef<SWidget> RebuildWidget() override;
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 	
 };

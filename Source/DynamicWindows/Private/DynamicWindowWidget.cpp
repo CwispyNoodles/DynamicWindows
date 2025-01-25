@@ -2,3 +2,62 @@
 
 
 #include "DynamicWindowWidget.h"
+
+#include "Blueprint/WidgetLayoutLibrary.h"
+#include "Components/Button.h"
+#include "Components/CanvasPanel.h"
+#include "Components/CanvasPanelSlot.h"
+#include "Components/PanelWidget.h"
+
+void UDynamicWindowWidget::BringToFront()
+{
+	if (UCanvasPanel* Parent = Cast<UCanvasPanel>(GetParent()))
+	{
+		UCanvasPanelSlot* CanvasPanelSlot = UWidgetLayoutLibrary::SlotAsCanvasSlot(this);
+		FAnchorData Layout = CanvasPanelSlot->GetLayout();
+		RemoveFromParent();
+		CanvasPanelSlot = Parent->AddChildToCanvas(this);
+		CanvasPanelSlot->SetLayout(Layout);
+		CanvasPanelSlot->SetAutoSize(true);
+	}
+}
+
+void UDynamicWindowWidget::HandleTaskbarPressed()
+{
+	BringToFront();
+	if (UCanvasPanelSlot* CanvasPanelSlot = UWidgetLayoutLibrary::SlotAsCanvasSlot(this))
+	{
+		FDynamicWindowDragOperation NewDynamicWindowDragOp
+		(
+		UWidgetLayoutLibrary::GetMousePositionOnViewport(this) - CanvasPanelSlot->GetPosition(),
+		CanvasPanelSlot
+		);
+
+		DynamicWindowDragOperation = NewDynamicWindowDragOp;
+		bIsDraggingWindow = true;
+	}
+}
+
+void UDynamicWindowWidget::HandleTaskbarReleased()
+{
+	bIsDraggingWindow = false;
+}
+
+void UDynamicWindowWidget::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	Taskbar->OnPressed.AddDynamic(this, &ThisClass::HandleTaskbarPressed);
+	Taskbar->OnReleased.AddDynamic(this, &ThisClass::HandleTaskbarReleased);
+}
+
+void UDynamicWindowWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+	Super::NativeTick(MyGeometry, InDeltaTime);
+
+	if (bIsDraggingWindow)
+	{
+		DynamicWindowDragOperation.DynamicWindowSlot->SetPosition(UWidgetLayoutLibrary::GetMousePositionOnViewport(this) - DynamicWindowDragOperation.LocalMousePos);
+		
+	}
+}
