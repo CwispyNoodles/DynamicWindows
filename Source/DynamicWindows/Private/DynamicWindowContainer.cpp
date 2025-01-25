@@ -17,7 +17,7 @@ UDynamicWindowContainer::UDynamicWindowContainer(const FObjectInitializer& Objec
 	
 }
 
-UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(bool& bSuccess, UWidget* Content)
+UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(UWidget* Content, FDynamicWindowArguments InArgs, bool& bSuccess)
 {
 	UDynamicWindowWidget* NewDynamicWindow = InitializeNewDynamicWindow(bSuccess);
 	if (!bSuccess)

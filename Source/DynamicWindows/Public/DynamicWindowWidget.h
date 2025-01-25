@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "DynamicWindowWidget.generated.h"
 
+class UTextBlock;
 class UCanvasPanelSlot;
 
 struct FDynamicWindowDragOperation
@@ -38,6 +39,9 @@ public:
 	TObjectPtr<UButton> CloseButton;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta=(BindWidget))
+	TObjectPtr<UTextBlock> Title;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta=(BindWidget))
 	TObjectPtr<UNamedSlot> Content;
 
 private:
@@ -47,7 +51,11 @@ private:
 	UFUNCTION()
 	void HandleTaskbarReleased();
 
+	UFUNCTION()
+	void HandleClosedButtonPressed();
+
 	bool bIsDraggingWindow = false;
+	
 	FDynamicWindowDragOperation DynamicWindowDragOperation = FDynamicWindowDragOperation(FVector2D(), nullptr);
 
 public: // UUserWidget Interface

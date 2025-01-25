@@ -43,12 +43,19 @@ void UDynamicWindowWidget::HandleTaskbarReleased()
 	bIsDraggingWindow = false;
 }
 
+void UDynamicWindowWidget::HandleClosedButtonPressed()
+{
+	RemoveFromParent();
+}
+
 void UDynamicWindowWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
 	Taskbar->OnPressed.AddDynamic(this, &ThisClass::HandleTaskbarPressed);
 	Taskbar->OnReleased.AddDynamic(this, &ThisClass::HandleTaskbarReleased);
+
+	CloseButton->OnPressed.AddDynamic(this, &ThisClass::HandleClosedButtonPressed);
 }
 
 void UDynamicWindowWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)

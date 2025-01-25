@@ -9,6 +9,13 @@
 class UDynamicWindowWidget;
 class UCanvasPanelSlot;
 class UCanvasPanel;
+
+USTRUCT(BlueprintType)
+struct DYNAMICWINDOWS_API FDynamicWindowArguments
+{
+	GENERATED_BODY()
+	
+};
 /**
  * 
  */
@@ -21,7 +28,7 @@ public:
 	UDynamicWindowContainer(const FObjectInitializer& ObjectInitializer);
 	
 	UFUNCTION(BlueprintCallable)
-	UCanvasPanelSlot* AddDynamicWindow(bool& bSuccess, UWidget* Content);
+	UCanvasPanelSlot* AddDynamicWindow(UWidget* Content, FDynamicWindowArguments InArgs, bool& bSuccess);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UDynamicWindowWidget> DynamicWindowWidgetClass;
