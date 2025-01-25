@@ -4,6 +4,7 @@
 #include "DynamicWindowContainer.h"
 #include "Blueprint/WidgetTree.h"
 #include "Components/CanvasPanel.h"
+#include "Components/CanvasPanelSlot.h"
 
 void UDynamicWindowContainer::AddDynamicWindowTest()
 {
@@ -16,7 +17,9 @@ void UDynamicWindowContainer::AddDynamicWindowTest()
 
 UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(UWidget* Content)
 {
-	return DynamicWindowPanel->AddChildToCanvas(Content);
+	UCanvasPanelSlot* CanvasPanelSlot = DynamicWindowPanel->AddChildToCanvas(Content);
+	CanvasPanelSlot->SetAutoSize(true);
+	return CanvasPanelSlot;
 }
 
 void UDynamicWindowContainer::NativeConstruct()
