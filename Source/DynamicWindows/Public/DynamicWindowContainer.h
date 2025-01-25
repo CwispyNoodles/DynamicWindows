@@ -17,14 +17,13 @@ class DYNAMICWINDOWS_API UDynamicWindowContainer : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(CallInEditor)
-	void AddDynamicWindowTest();
+	UDynamicWindowContainer(const FObjectInitializer& ObjectInitializer);
 	
 	UFUNCTION(BlueprintCallable)
 	UCanvasPanelSlot* AddDynamicWindow(UWidget* Content);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<UUserWidget> Widget;
+	TSubclassOf<UUserWidget> DynamicWindowWidgetClass;
 
 protected:
 	UPROPERTY()

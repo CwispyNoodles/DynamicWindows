@@ -2,17 +2,18 @@
 
 
 #include "DynamicWindowContainer.h"
+
+#include "DynamicWindowWidget.h"
 #include "Blueprint/WidgetTree.h"
 #include "Components/CanvasPanel.h"
 #include "Components/CanvasPanelSlot.h"
 
-void UDynamicWindowContainer::AddDynamicWindowTest()
+UDynamicWindowContainer::UDynamicWindowContainer(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
-	if (Widget)
-	{
-		UUserWidget* NewWidget = CreateWidget(GetOwningPlayer(), Widget);
-		AddDynamicWindow(NewWidget);
-	}
+	static ConstructorHelpers::FClassFinder<UDynamicWindowWidget> DefaultDynamicWindowWidget(TEXT("/DynamicWindows/W_DefaultDynamicWindow"));
+	DynamicWindowWidgetClass = DefaultDynamicWindowWidget.Class;
+	
 }
 
 UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(UWidget* Content)
@@ -31,8 +32,8 @@ void UDynamicWindowContainer::NativeConstruct()
 
 TSharedRef<SWidget> UDynamicWindowContainer::RebuildWidget()
 {
+	
 	DynamicWindowPanel = WidgetTree->ConstructWidget<UCanvasPanel>(UCanvasPanel::StaticClass(), TEXT("DynamicWindowPanel"));
 	WidgetTree->RootWidget = DynamicWindowPanel;
 
-	return Super::RebuildWidget();
 }
