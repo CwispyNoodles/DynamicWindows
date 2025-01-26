@@ -4,7 +4,6 @@
 #include "DynamicWindowWidget.h"
 
 #include "Blueprint/WidgetLayoutLibrary.h"
-#include "Components/Border.h"
 #include "Components/Button.h"
 #include "Components/CanvasPanel.h"
 #include "Components/CanvasPanelSlot.h"
@@ -75,7 +74,6 @@ FReply UDynamicWindowWidget::NativeOnPreviewMouseButtonDown(const FGeometry& InG
 	if (InMouseEvent.GetEffectingButton().IsMouseButton())
 	{
 		BringToFront();
-		GEngine->AddOnScreenDebugMessage(0, 3.0f, FColor::Green, "Mouse Down");
 	}
 	return Super::NativeOnPreviewMouseButtonDown(InGeometry, InMouseEvent);
 }

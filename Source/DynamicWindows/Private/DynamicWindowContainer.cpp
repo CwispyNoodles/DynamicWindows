@@ -8,6 +8,7 @@
 #include "Components/CanvasPanel.h"
 #include "Components/CanvasPanelSlot.h"
 #include "Components/NamedSlot.h"
+#include "Components/TextBlock.h"
 
 UDynamicWindowContainer::UDynamicWindowContainer(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -22,6 +23,8 @@ UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(UWidget* Content, FD
 	UDynamicWindowWidget* NewDynamicWindow = InitializeNewDynamicWindow(bSuccess);
 	if (!bSuccess)
 		return nullptr;
+
+	NewDynamicWindow->Title->SetText(InArgs.Title);
 	
 	NewDynamicWindow->Content->SetContent(Content);
 	UCanvasPanelSlot* CanvasPanelSlot = DynamicWindowPanel->AddChildToCanvas(NewDynamicWindow);
