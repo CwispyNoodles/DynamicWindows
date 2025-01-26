@@ -24,7 +24,6 @@ void UDynamicWindowWidget::BringToFront()
 
 void UDynamicWindowWidget::HandleTaskbarPressed()
 {
-	BringToFront();
 	if (UCanvasPanelSlot* CanvasPanelSlot = UWidgetLayoutLibrary::SlotAsCanvasSlot(this))
 	{
 		FDynamicWindowDragOperation NewDynamicWindowDragOp

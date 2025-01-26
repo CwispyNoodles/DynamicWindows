@@ -16,13 +16,14 @@ struct DYNAMICWINDOWS_API FDynamicWindowArguments
 {
 	GENERATED_BODY()
 
-	FAnchorData DynamicWindowLayout;
-
 	UPROPERTY(BlueprintReadWrite)
 	FText Title = FText::FromString("Placeholder");
 
 	UPROPERTY(BlueprintReadWrite)
 	UWidget* Content = nullptr;
+
+	UPROPERTY(BlueprintReadWrite)
+	FAnchorData Layout;
 };
 /**
  * 

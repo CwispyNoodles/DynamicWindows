@@ -28,6 +28,7 @@ UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(FDynamicWindowArgume
 	
 	NewDynamicWindow->Content->SetContent(InArgs.Content);
 	UCanvasPanelSlot* CanvasPanelSlot = DynamicWindowPanel->AddChildToCanvas(NewDynamicWindow);
+	CanvasPanelSlot->SetLayout(InArgs.Layout);
 	CanvasPanelSlot->SetAutoSize(true);
 	bSuccess = true;
 	return CanvasPanelSlot;
