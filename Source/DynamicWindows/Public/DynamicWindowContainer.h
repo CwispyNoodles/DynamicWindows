@@ -20,6 +20,9 @@ struct DYNAMICWINDOWS_API FDynamicWindowArguments
 
 	UPROPERTY(BlueprintReadWrite)
 	FText Title = FText::FromString("Placeholder");
+
+	UPROPERTY(BlueprintReadWrite)
+	UWidget* Content = nullptr;
 };
 /**
  * 
@@ -33,7 +36,7 @@ public:
 	UDynamicWindowContainer(const FObjectInitializer& ObjectInitializer);
 	
 	UFUNCTION(BlueprintCallable)
-	UCanvasPanelSlot* AddDynamicWindow(UWidget* Content, FDynamicWindowArguments InArgs, bool& bSuccess);
+	UCanvasPanelSlot* AddDynamicWindow(FDynamicWindowArguments InArgs, bool& bSuccess);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<UDynamicWindowWidget> DynamicWindowWidgetClass;
@@ -47,7 +50,6 @@ protected:
 
 public: // UUserWidget Interface
 	virtual TSharedRef<SWidget> RebuildWidget() override;
-	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 	
 };

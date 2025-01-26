@@ -18,7 +18,7 @@ UDynamicWindowContainer::UDynamicWindowContainer(const FObjectInitializer& Objec
 	
 }
 
-UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(UWidget* Content, FDynamicWindowArguments InArgs, bool& bSuccess)
+UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(FDynamicWindowArguments InArgs, bool& bSuccess)
 {
 	UDynamicWindowWidget* NewDynamicWindow = InitializeNewDynamicWindow(bSuccess);
 	if (!bSuccess)
@@ -26,7 +26,7 @@ UCanvasPanelSlot* UDynamicWindowContainer::AddDynamicWindow(UWidget* Content, FD
 
 	NewDynamicWindow->Title->SetText(InArgs.Title);
 	
-	NewDynamicWindow->Content->SetContent(Content);
+	NewDynamicWindow->Content->SetContent(InArgs.Content);
 	UCanvasPanelSlot* CanvasPanelSlot = DynamicWindowPanel->AddChildToCanvas(NewDynamicWindow);
 	CanvasPanelSlot->SetAutoSize(true);
 	bSuccess = true;
@@ -55,11 +55,4 @@ TSharedRef<SWidget> UDynamicWindowContainer::RebuildWidget()
 		WidgetTree->RootWidget = DynamicWindowPanel;
 	}
 	return Super::RebuildWidget();
-}
-
-void UDynamicWindowContainer::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
-{
-	Super::NativeTick(MyGeometry, InDeltaTime);
-
-	
 }
