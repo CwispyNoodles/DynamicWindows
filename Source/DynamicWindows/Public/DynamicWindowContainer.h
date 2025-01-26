@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/CanvasPanelSlot.h"
 #include "DynamicWindowContainer.generated.h"
 
 class UDynamicWindowWidget;
@@ -14,6 +15,8 @@ USTRUCT(BlueprintType)
 struct DYNAMICWINDOWS_API FDynamicWindowArguments
 {
 	GENERATED_BODY()
+
+	FAnchorData DynamicWindowLayout;
 	
 };
 /**

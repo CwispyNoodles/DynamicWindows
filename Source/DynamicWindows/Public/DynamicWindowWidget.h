@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "DynamicWindowWidget.generated.h"
 
+class UBorder;
 class UTextBlock;
 class UCanvasPanelSlot;
 
@@ -61,4 +62,5 @@ private:
 public: // UUserWidget Interface
 	virtual void NativeConstruct() override;
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+	virtual FReply NativeOnPreviewMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
 };
